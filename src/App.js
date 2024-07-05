@@ -9,15 +9,16 @@ const suppliersData = createStore({
   loadUrl: `${url}/GetSuppliers`,
 });
 const App = () => (
-  <DataGrid dataSource={suppliersData} remoteOperations={true} showBorders={true} id="gridContainer">
-    <MasterDetail enabled={true} component={MasterDetailView} />
-    <Paging defaultPageSize={15} />
-
-    <Column dataField="ContactName" />
-    <Column dataField="ContactTitle" />
-    <Column dataField="CompanyName" />
-    <Column dataField="City" />
-    <Column dataField="Country" />
-  </DataGrid>
+  <div>
+    <DataGrid dataSource={suppliersData} remoteOperations={true} showBorders={true} id="gridContainer"> {/* para ponerlo en la grilla container*/}
+      <MasterDetail enabled={true} component={MasterDetailView} />{/* componente tipo acordeon */}
+      <Paging defaultPageSize={15} /> {/* size por defecto de la paginacion */}
+      <Column dataField="ContactName" /> {/* columnas */} {/* en las props de ts esta todas las disponibles y pa que sirven */}
+      <Column dataField="ContactTitle" />
+      <Column dataField="CompanyName" />
+      <Column dataField="City" />
+      <Column dataField="Country" />
+    </DataGrid>
+  </div>
 );
 export default App;

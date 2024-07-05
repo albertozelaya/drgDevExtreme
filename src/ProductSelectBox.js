@@ -2,11 +2,11 @@ import React, { useCallback, useEffect, useState } from "react";
 import { SelectBox } from "devextreme-react/select-box";
 import { createStore } from "devextreme-aspnet-data-nojquery";
 
-const url = "https://js.devexpress.com/Demos/Mvc/api/DataGridAdvancedMasterDetailView";
+const url = "https://js.devexpress.com/Demos/Mvc/api/DataGridAdvancedMasterDetailView"; /* endpoint */
 const productLabel = { "aria-label": "Product" };
 const ProductSelectBox = (props) => {
-  const [productsData, setProductsData] = useState(null);
-  const valueChanged = useCallback(
+  const [productsData, setProductsData] = useState(null); /* estado de info, data */
+  const valueChanged = useCallback( /* cada que cambien los productos, props de parte de la api */
     (e) => {
       props.onProductChanged(e.value);
     },
@@ -19,24 +19,27 @@ const ProductSelectBox = (props) => {
         props.onProductChanged(firstItem.ProductID);
       }
     };
-    const newProductsData = createStore({
+    const newProductsData = createStore({ /* createStore para añadir data en el onLoaded*/
       key: "ProductID",
       loadParams: { SupplierID: props.supplierId },
       loadUrl: `${url}/GetProductsBySupplier`,
       onLoaded: setDefaultValue,
     });
     setProductsData(newProductsData);
-  }, [props]);
+  }, [props]); 
+  /* el return es para llenar de info los componentes hijos */
   return (
-    <SelectBox
-      value={props.productId}
-      deferRendering={false}
-      inputAttr={productLabel}
-      dataSource={productsData}
-      valueExpr="ProductID"
-      displayExpr="ProductName"
-      onValueChanged={valueChanged}
-    />
+    <div>
+      <SelectBox
+        value={props.productId}
+        deferRendering={false}
+        inputAttr={productLabel}
+        dataSource={productsData}
+        valueExpr="ProductID"
+        displayExpr="ProductName"
+        onValueChanged={valueChanged}
+      />
+    </div>
   );
 };
 export default ProductSelectBox;

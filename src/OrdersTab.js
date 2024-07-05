@@ -4,8 +4,8 @@ import ProductSelectBox from "./ProductSelectBox.js";
 import OrderHistory from "./OrderHistory.js";
 
 const OrdersTab = (props) => {
-  const [chosenProductId, setChosenProductId] = useState(null);
-  const renderSelectBox = useCallback(
+  const [chosenProductId, setChosenProductId] = useState(null); /* inicia un estado nulo */
+  const renderSelectBox = useCallback( /* hook que es un efecto, almacena y ejecuta una funcion cada que cambia el estado o la props*/
     () => (
       <ProductSelectBox
         supplierId={props.supplierId}
@@ -17,11 +17,12 @@ const OrdersTab = (props) => {
   );
   const renderOrderHistory = useCallback(() => <OrderHistory productId={chosenProductId} />, [chosenProductId]);
   return (
-    <Form labelLocation="top" className="form-container">
-      <Item render={renderSelectBox}>
-        <Label text="Product" />
+    <Form labelLocation="top" className="form-container"> {/* contenedor */}
+      <Item render={renderSelectBox}>{/* input de filtrado por product */}
+        <Label text="Product" /> 
       </Item>
-      <Item render={renderOrderHistory}>
+      {/* tiene que estar dentro del component el texto */}
+      <Item render={renderOrderHistory}> 
         <Label text="Order History" />
       </Item>
     </Form>
