@@ -6,6 +6,8 @@ import OrdersTab from "./OrdersTab.js";
 const MasterDetailView = (props) => { /* detalles de cada tabla del acordeon */
   const renderOrdersTab = useCallback(() => <OrdersTab supplierId={props.data.key} />, [props.data.key]); /* tabla orders tab */
   const renderAddressTab = useCallback(() => <AddressTab data={props.data.data} />, [props.data.data]); /* tabla address tab */
+  const renderNewItem1 = useCallback(() => <div>Nuevo Item 1</div>, []);
+
   return (
     <div>
       <TabPanel> {/* container que muestara info de orders y address */}

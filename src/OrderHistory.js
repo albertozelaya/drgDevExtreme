@@ -18,7 +18,6 @@ const OrderHistory = ({ productId }) => {
   return (
     <div>
       <DataGrid dataSource={orderHistoryStore} showBorders={true}>
-        {" "}
         {/* Es un container que pone margen y arregla las tablas */}
         <Paging defaultPageSize={5} /> {/* por defeco lo pone tipo tabla */}
         <Column dataField="OrderID" /> {/* dataField no solo es el nombre, sino la prop que trae la info del array */}

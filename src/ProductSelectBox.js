@@ -6,7 +6,8 @@ const url = "https://js.devexpress.com/Demos/Mvc/api/DataGridAdvancedMasterDetai
 const productLabel = { "aria-label": "Product" };
 const ProductSelectBox = (props) => {
   const [productsData, setProductsData] = useState(null); /* estado de info, data */
-  const valueChanged = useCallback( /* cada que cambien los productos, props de parte de la api */
+  const valueChanged = useCallback(
+    /* cada que cambien los productos, props de parte de la api */
     (e) => {
       props.onProductChanged(e.value);
     },
@@ -19,25 +20,29 @@ const ProductSelectBox = (props) => {
         props.onProductChanged(firstItem.ProductID);
       }
     };
-    const newProductsData = createStore({ /* createStore para añadir data en el onLoaded*/
-      key: "ProductID",
+    const newProductsData = createStore({
+      /* createStore para añadir data en el onLoaded*/ key: "ProductID",
       loadParams: { SupplierID: props.supplierId },
       loadUrl: `${url}/GetProductsBySupplier`,
       onLoaded: setDefaultValue,
     });
     setProductsData(newProductsData);
-  }, [props]); 
+  }, [props]);
   /* el return es para llenar de info los componentes hijos */
+  const hiddenStyle = {
+    display: "none",
+  };
   return (
     <div>
-      <SelectBox
+      <SelectBox //este box tambien transporta data al product
         value={props.productId}
         deferRendering={false}
         inputAttr={productLabel}
         dataSource={productsData}
-        valueExpr="ProductID"
-        displayExpr="ProductName"
+        valueExpr="ProductID" //el id que esoera para filtrar
+        displayExpr="ProductName" //el nobre que muestra el label
         onValueChanged={valueChanged}
+        style={hiddenStyle}
       />
     </div>
   );
